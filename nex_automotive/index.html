@@ -1,0 +1,639 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="NEX Automotive — experiência premium na escolha do seu próximo veículo.">
+
+  <title>NEX Automotive | Automóveis</title>
+
+  <!-- FONTES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JAVASCRIPT -->
+  <script src="js/app.js" defer></script>
+</head>
+
+<body>
+
+  <!-- =====================================
+       LOGIN ADMINISTRATIVO
+  ====================================== -->
+
+  <div class="login-screen hidden" id="loginScreen">
+
+    <div class="login-card">
+
+      <span class="eyebrow">NEX AUTOMOTIVE</span>
+
+      <h2>Acesso administrativo</h2>
+
+      <p>Entre para gerenciar o estoque da loja.</p>
+
+      <form id="loginForm">
+
+        <label>
+          E-mail
+          <input
+            type="email"
+            id="loginEmail"
+            required
+            placeholder="admin@nexautomotive.demo"
+          >
+        </label>
+
+        <label>
+          Senha
+          <input
+            type="password"
+            id="loginPassword"
+            required
+            placeholder="Digite sua senha"
+          >
+        </label>
+
+        <p class="login-error hidden" id="loginError">
+          E-mail ou senha incorretos.
+        </p>
+
+        <button class="btn-gold full" type="submit">
+          Entrar no painel
+        </button>
+
+        <button class="btn-outline full" type="button" id="loginBack">
+          Voltar ao site
+        </button>
+
+      </form>
+
+      <small>Ambiente demonstrativo da NEX STUDIO.</small>
+
+    </div>
+  </div>
+
+
+  <!-- =====================================
+       CABEÇALHO DO SITE
+  ====================================== -->
+
+  <header class="header">
+
+    <a href="#" class="brand">
+      <span class="brand-symbol">N</span>
+      <span>NEX <small>AUTOMOTIVE</small></span>
+    </a>
+
+    <nav class="nav">
+      <a href="#inicio">Início</a>
+      <a href="#estoque">Estoque</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+
+    <button class="admin-open" id="adminOpen">
+      Painel administrativo ↗
+    </button>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+      ☰
+    </button>
+
+  </header>
+
+
+  <!-- =====================================
+       CONTEÚDO PRINCIPAL
+  ====================================== -->
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="hero" id="inicio">
+
+      <div class="hero-content">
+
+        <span class="eyebrow">
+          EXPERIÊNCIA AUTOMOTIVA
+        </span>
+
+        <h1>
+          Seu próximo<br>
+          capítulo começa <span>aqui.</span>
+        </h1>
+
+        <p>
+          Encontre veículos selecionados para quem valoriza
+          design, desempenho e exclusividade.
+        </p>
+
+        <a href="#estoque" class="btn-gold">
+          Explorar veículos <span>↗</span>
+        </a>
+
+        <div class="hero-note">
+          PROJETO DEMONSTRATIVO · NEX STUDIO
+        </div>
+
+      </div>
+
+      <div class="hero-image">
+
+        <div class="hero-image-overlay"></div>
+
+        <div class="hero-image-label">
+          <span>CURADORIA AUTOMOTIVA</span>
+          <strong>Excelência em cada detalhe.</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DESTAQUES -->
+
+    <section class="highlights">
+
+      <div>
+        <strong>01</strong>
+        <span>Seleção especial</span>
+      </div>
+
+      <div>
+        <strong>02</strong>
+        <span>Experiência premium</span>
+      </div>
+
+      <div>
+        <strong>03</strong>
+        <span>Atendimento personalizado</span>
+      </div>
+
+    </section>
+
+
+    <!-- ESTOQUE -->
+
+    <section class="inventory section" id="estoque">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">NOSSO ESTOQUE</span>
+
+          <h2>
+            Encontre seu <span>próximo veículo.</span>
+          </h2>
+        </div>
+
+        <p id="vehicleCount">
+          0 veículos disponíveis
+        </p>
+
+      </div>
+
+
+      <!-- FILTROS -->
+
+      <div class="filters">
+
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Buscar por marca ou modelo..."
+        >
+
+        <select id="brandFilter">
+          <option value="">Todas as marcas</option>
+        </select>
+
+        <select id="priceFilter">
+          <option value="">Qualquer preço</option>
+          <option value="50000">Até R$ 50 mil</option>
+          <option value="100000">Até R$ 100 mil</option>
+          <option value="150000">Até R$ 150 mil</option>
+          <option value="200000">Até R$ 200 mil</option>
+        </select>
+
+        <select id="yearFilter">
+          <option value="">Todos os anos</option>
+          <option value="2020">A partir de 2020</option>
+          <option value="2015">A partir de 2015</option>
+          <option value="2010">A partir de 2010</option>
+        </select>
+
+      </div>
+
+
+      <!-- VEÍCULOS -->
+
+      <div class="vehicle-grid" id="vehicleGrid"></div>
+
+      <div class="empty-state hidden" id="emptyState">
+
+        <h3>Nenhum veículo encontrado</h3>
+
+        <p>
+          Tente alterar os filtros da sua pesquisa.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- SOBRE -->
+
+    <section class="about section" id="sobre">
+
+      <span class="eyebrow">
+        SOBRE A EXPERIÊNCIA
+      </span>
+
+      <h2>
+        Mais do que encontrar um carro.<br>
+        <span>Encontrar o carro certo.</span>
+      </h2>
+
+      <p>
+        Uma experiência digital pensada para apresentar
+        veículos com clareza, sofisticação e praticidade.
+      </p>
+
+      <small>
+        DEMONSTRAÇÃO DESENVOLVIDA PELA NEX STUDIO
+      </small>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================
+       RODAPÉ
+  ====================================== -->
+
+  <footer class="footer">
+
+    <a href="#" class="brand">
+      <span class="brand-symbol">N</span>
+      <span>NEX <small>AUTOMOTIVE</small></span>
+    </a>
+
+    <p>
+      © 2026 NEX Automotive · Projeto demonstrativo NEX STUDIO.
+    </p>
+
+  </footer>
+
+
+  <!-- =====================================
+       MODAL DE DETALHES
+  ====================================== -->
+
+  <div class="modal hidden" id="detailsModal">
+
+    <div class="modal-card details-card">
+
+      <button class="modal-close" data-close="detailsModal">
+        ×
+      </button>
+
+      <div id="detailsContent"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================
+       PAINEL ADMINISTRATIVO
+  ====================================== -->
+
+  <div class="admin-screen hidden" id="adminScreen">
+
+
+    <!-- CABEÇALHO DO PAINEL -->
+
+    <div class="admin-header">
+
+      <div>
+        <span class="eyebrow">NEX AUTOMOTIVE</span>
+        <h2>Painel administrativo</h2>
+      </div>
+
+      <div class="admin-header-actions">
+
+        <button class="btn-outline" id="adminLogout">
+          Sair da conta ↗
+        </button>
+
+        <button class="btn-outline" id="adminClose">
+          Voltar ao site ×
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- CONFIGURAÇÕES DA LOJA -->
+
+    <section class="settings-card">
+
+      <h3>Configurações da loja</h3>
+
+      <form id="settingsForm">
+
+        <label>
+          Nome da concessionária
+
+          <input
+            id="storeName"
+            placeholder="Ex.: Wagner Motors"
+            required
+          >
+        </label>
+
+        <label>
+          WhatsApp com código do país
+
+          <input
+            id="storeWhatsapp"
+            placeholder="5551999999999"
+            required
+          >
+        </label>
+
+        <button class="btn-gold" type="submit">
+          Salvar configurações
+        </button>
+
+      </form>
+
+    </section>
+
+
+    <!-- INDICADORES -->
+
+    <section class="admin-stats">
+
+      <div class="stat-card">
+        <span>Total de veículos</span>
+        <strong id="totalStat">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Disponíveis</span>
+        <strong id="availableStat">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Vendidos</span>
+        <strong id="soldStat">0</strong>
+      </div>
+
+    </section>
+
+
+    <!-- ÁREA PRINCIPAL DO PAINEL -->
+
+    <div class="admin-layout">
+
+
+      <!-- CADASTRO DE VEÍCULOS -->
+
+      <section class="admin-form-card">
+
+        <h3 id="formTitle">
+          Cadastrar veículo
+        </h3>
+
+        <form id="vehicleForm">
+
+          <input type="hidden" id="vehicleId">
+
+
+          <label>
+            Marca
+
+            <input
+              id="vehicleBrand"
+              required
+              placeholder="Ex.: Volkswagen"
+            >
+          </label>
+
+
+          <label>
+            Modelo
+
+            <input
+              id="vehicleModel"
+              required
+              placeholder="Ex.: Jetta"
+            >
+          </label>
+
+
+          <div class="form-row">
+
+            <label>
+              Ano
+
+              <input
+                id="vehicleYear"
+                type="number"
+                min="1900"
+                max="2100"
+                required
+              >
+            </label>
+
+            <label>
+              Quilometragem
+
+              <input
+                id="vehicleKm"
+                type="number"
+                min="0"
+                required
+              >
+            </label>
+
+          </div>
+
+
+          <div class="form-row">
+
+            <label>
+              Câmbio
+
+              <select id="vehicleTransmission">
+                <option>Automático</option>
+                <option>Manual</option>
+                <option>CVT</option>
+              </select>
+            </label>
+
+            <label>
+              Combustível
+
+              <select id="vehicleFuel">
+                <option>Flex</option>
+                <option>Gasolina</option>
+                <option>Diesel</option>
+                <option>Híbrido</option>
+                <option>Elétrico</option>
+              </select>
+            </label>
+
+          </div>
+
+
+          <label>
+            Preço (R$)
+
+            <input
+              id="vehiclePrice"
+              type="number"
+              min="0"
+              step="0.01"
+              required
+            >
+          </label>
+
+
+          <label>
+            Descrição
+
+            <textarea
+              id="vehicleDescription"
+              rows="3"
+              placeholder="Descreva o veículo..."
+            ></textarea>
+          </label>
+
+
+          <label>
+            Foto do veículo
+
+            <input type="file" id="vehicleImage" accept="image/*" multiple>
+          </label>
+
+
+          <div class="image-preview" id="imagePreview">
+            Prévia da imagem
+          </div>
+
+
+          <label class="checkbox-label">
+
+            <input
+              id="vehicleSold"
+              type="checkbox"
+            >
+
+            Marcar como vendido
+
+          </label>
+
+
+          <button
+            class="btn-gold full"
+            type="submit"
+            id="saveVehicle"
+          >
+            Salvar veículo
+          </button>
+
+
+          <button
+            class="btn-outline full hidden"
+            type="button"
+            id="cancelEdit"
+          >
+            Cancelar edição
+          </button>
+
+        </form>
+
+      </section>
+
+
+      <!-- GERENCIAMENTO DO ESTOQUE -->
+
+      <section class="admin-list-card">
+
+        <div class="admin-list-heading">
+
+          <h3>Gerenciar estoque</h3>
+
+          <span id="adminListCount">
+            0 anúncios
+          </span>
+
+        </div>
+
+        <div id="adminVehicleList"></div>
+
+      </section>
+
+    </div>
+
+
+    <!-- AVISO -->
+
+    <p class="admin-warning">
+      Painel demonstrativo local.
+      Não possui autenticação real nem sincronização entre dispositivos.
+    </p>
+
+  </div>
+<!-- PÁGINA INDIVIDUAL DO VEÍCULO -->
+<section class="vehicle-page hidden" id="vehiclePage">
+  <div class="vehicle-page-container">
+
+    <button class="btn-outline" id="backToInventory">
+      ← Voltar ao estoque
+    </button>
+
+    <div class="vehicle-detail-layout">
+
+      <div class="vehicle-gallery">
+        <div class="vehicle-main-image">
+          <img id="detailMainImage" src="" alt="Veículo">
+        </div>
+        <div class="vehicle-thumbnails" id="detailThumbnails"></div>
+      </div>
+
+      <div class="vehicle-detail-info">
+        <span class="eyebrow" id="detailBrand"></span>
+        <h1 id="detailTitle"></h1>
+        <div class="vehicle-detail-price" id="detailPrice"></div>
+        <div class="vehicle-detail-meta" id="detailMeta"></div>
+        <p id="detailDescription"></p>
+        <div class="vehicle-detail-actions" id="detailActions"></div>
+      </div>
+
+    </div>
+
+    <div class="vehicle-specifications">
+      <span class="eyebrow">DETALHES DO VEÍCULO</span>
+      <h2>Ficha técnica</h2>
+      <div class="specification-grid" id="detailSpecifications"></div>
+    </div>
+
+  </div>
+</section>
+</body>
+</html>
